@@ -1,7 +1,7 @@
 # Tenancy-Contract
 The main purpose of tenancy contract system is to manage effectively house owner's and tenant’s mutuality. This website will provide an agreement to house owner to keep the tenant’s information safe. They will not need any paper-based document for agreement. Thus, they can easily take the proper advantages. This system will store information of tenants and house owners in server and they can easily find their agreement. This system will decrease the complex situation of agreement and increase the comfortness for both tenant and house owner.
 
-**In Bangla:** Tenancy Contract ওয়েব অ্যাপ টির মাধ্যমে বাড়িওয়ালা - ভাড়াটিয়ার মধ্যে চুক্তি অনলাইনেই করতে পারবে। এতে করে ভাড়াটিয়াদের Identity থাকবে। ভাড়া পেতে কোন সমস্যার মুখোমুখি পড়তে হবে না। 
+**In Bangla:** Tenancy Contract ওয়েব অ্যাপ টির মাধ্যমে বাড়িওয়ালা - ভাড়াটিয়ার মধ্যে চুক্তি অনলাইনেই করতে পারবে। এতে করে ভাড়াটিয়াদের Identity থাকবে। ভাড়া পেতে কোন সমস্যার মুখোমুখি পড়তে হবে না। Contract Form পূরন করার পর ইনপুট/ডাটা অনুযায়ী Deed stamp, PDF হিসাবে generate হবে। 
 
 # Features:
 
