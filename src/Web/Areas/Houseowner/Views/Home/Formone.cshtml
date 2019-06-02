@@ -1,0 +1,234 @@
+@using TenancyContract.Areas.Houseowner.Views.Shared
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Extensions
+@using Web.Extensions
+@using TenancyContract.Entities
+@using Web.Entities
+
+@model TenancyContract.Models.CPaperOneModel
+@inject IHttpContextAccessor HttpContextAccessor 
+@{
+    ViewData["Title"] = "Contract Paper - Type One";
+    ViewData["ActivePage"] = ManageNavPages.ContractPaper;
+}
+<h5 class="text-center">@ViewData["Title"]</h5><br>
+
+@if(HttpContextAccessor.HttpContext.Session.Get<Tenant>("sstenant") != null)
+    {
+        var result = HttpContextAccessor.HttpContext.Session.Get<Tenant>("sstenant");
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                    <div class="col-md-4">@User.Claims.ElementAt(2).Value</div>
+                    <div class="col-md-4"><i class="far fa-handshake fa-5x"></i></div>
+                    <div class="col-md-4">@result.Name</div>
+                    </div>
+                    <br>
+                    
+
+
+                    <div class="card shadow p-3 mb-5 bg-white rounded" style="font-size:16px">
+                    <div class="card-body">
+                        <form method="post">
+                            @{
+                                DateTime time = DateTime.Now;
+
+                            }
+                            <input type="hidden" value="@result.Id" asp-for="TenantId" />
+                            <input type="hidden" value="@result.Name" asp-for="TenantName" />
+                            <input type="hidden" value="@User.Claims.ElementAt(2).Value" asp-for="HouseOwnerName" />
+                            <div class="form-group row">
+                                <label for="" class="col-sm-3 col-form-label">Today's Date </label>
+                                <div class="col-sm-4">
+                                    <input type="text" readonly class="form-control-plaintext" id="ttime" value="@time" asp-for="AgreementDate">
+                                    <span></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="" class="col-sm-3 col-form-label">Tenant Name</label>
+                                <div class="col-sm-4">
+                                    <input type="text" readonly class="form-control-plaintext" id="tname" value="@result.Name">
+                                    <span></span>
+                                </div>
+
+                            </div>
+                            <div class="form-group row">
+                                <label for="" class="col-sm-3 col-form-label">Tenant NID</label>
+                                <div class="col-sm-4">
+                                    <input type="text" readonly class="form-control-plaintext" id="tnid" value="@result.NID" asp-for="TenantNID">
+                                    <span></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"> Select House</label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" id="houseId" name="houseId"
+                                            asp-items="@(new SelectList(@ViewBag.HouseList,"Id", "DagNo"))"></select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="" class="col-sm-3 col-form-label">Contract Start at</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" placeholder="Select Start Date" id="contractStartDate" asp-for="StartDate">
+                                    <span asp-validation-for="StartDate" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="" class="col-sm-3 col-form-label">Contract End at</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" placeholder="Select End Date" id="contractEndDate" asp-for="EndDate">
+                                    <span asp-validation-for="EndDate" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="" class="col-sm-3 col-form-label">Basic Rent Increase at</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" placeholder="Select End Date" id="contractIncreaseDate" asp-for="IncreaseTime">
+                                   <span asp-validation-for="IncreaseTime" class="text-danger"></span>
+                                </div>
+                            </div>                            
+                            <div class="form-group row">
+                                <label for="" class="col-sm-3 col-form-label">Advance</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" id="tadvance" asp-for="Advance">
+                                    <span asp-validation-for="Advance" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            
+                            <div class="form-group row">
+                                <label for="" class="col-sm-3 col-form-label">Gas Bill/Month</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" id="tgas" asp-for="GasBill">
+                                    <span asp-validation-for="GasBill" class="text-danger"></span>
+                                </div>
+                                <label class="col-sm-4">As per Government rule</label>
+                            </div>
+                            <div class="form-group row">
+                                <label for="" class="col-sm-3 col-form-label">Electricity/Unit</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" id="telectricity" asp-for="ElectricityBill">
+                                    <span asp-validation-for="ElectricityBill" class="text-danger"></span>
+                                </div>
+                                <label class="col-sm-4">As per Government Rule</label>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="" class="col-sm-3 col-form-label">Maintenance Cost</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" id="tmaintenance" asp-for="MaintainCost">
+                                   <span asp-validation-for="MaintainCost" class="text-danger"></span>
+                                </div>
+                                <label class="col-sm-3">Ex. Security, Dust Bill</label>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="" class="col-sm-3 col-form-label">Pay at </label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" id="tmaintenance" asp-for="PayTime"> 
+                                    <span></span>
+                                </div>
+                                <label class="col-sm-3">th Day of Month</label>
+                            </div> 
+                            <div class="form-group row">
+                                <label for="" class="col-sm-3 col-form-label">Increase Rate</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" id="tmaintenance" asp-for="IncreaseRate"> 
+                                    <span asp-validation-for="MaintainCost" class="text-danger"></span>
+                                </div>
+                                <label class="col-sm-3">%</label>
+                            </div>                                                        
+
+                            <div class="form-group" row>
+                                <button type="submit" class="btn btn-success" formaction="Formone"><i class="fas fa-check"></i>Create</button>
+                                <button type="submit" class="btn btn-info"  formtarget="_blank" formaction="FormPDF">Print</button>
+                                <button type="submit" class="btn btn-danger" formtarget="_blank" formaction ="ViewPDF">View As PDF</button>
+                                
+                            </div>
+                        </form>
+                    </div>
+                    </div>
+
+                    
+                </div>
+            </div>  
+
+}else {
+        <p>Session Ended!</p>
+        <p>Go Back and Try ADD Tenant!</p>
+    }  
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        //TODO:Datepicker
+        //TODO:Must be cheeck inserting data
+        $(function () {
+            $("#contractStartDate").datepicker();
+        });
+        $(document).ready(function () {
+            var dob = document.getElementById('contractStartDate').value;
+            var splitData = "";
+            if (dob.indexOf(" ") > 0) {
+                splitData = dob.split(" ");
+            }
+            else {
+                splitData = dob.split("T");
+            }
+            var time = splitData[1].substring(0, 5);
+            if (time.slice(-1) == ":") {
+                time = time.substring(0, time.length - 1);
+            }
+            var amPmTime = splitData[2];
+            $('#contractStartDate').attr('value', splitData[0]);
+            //$('#contractStartDate').attr('value', time + ' ' + amPmTime);
+        });
+    </script>
+    
+    <script>
+        $(function () {
+        $("#contractEndDate").datepicker();
+        });
+        $(document).ready(function () {
+            var dob = document.getElementById('contractEndDate').value;
+            var splitData = "";
+            if (dob.indexOf(" ") > 0) {
+                splitData = dob.split(" ");
+            }
+            else {
+                splitData = dob.split("T");
+            }
+            var time = splitData[1].substring(0, 5);
+            if (time.slice(-1) == ":") {
+                time = time.substring(0, time.length - 1);
+            }
+            var amPmTime = splitData[2];
+            $('#contractEndDate').attr('value', splitData[0]);
+            //$('#contractEndDate').attr('value', time + ' ' + amPmTime);
+        });
+    </script>
+     <script>
+        $(function () {
+        $("#contractIncreaseDate").datepicker();
+        });
+        $(document).ready(function () {
+            var dob = document.getElementById('contractIncreaseDate').value;
+            var splitData = "";
+            if (dob.indexOf(" ") > 0) {
+                splitData = dob.split(" ");
+            }
+            else {
+                splitData = dob.split("T");
+            }
+            var time = splitData[1].substring(0, 5);
+            if (time.slice(-1) == ":") {
+                time = time.substring(0, time.length - 1);
+            }
+            var amPmTime = splitData[2];
+            $('#contractIncreaseDate').attr('value', splitData[0]);
+            //$('#contractEndDate').attr('value', time + ' ' + amPmTime);
+        });
+    </script>
+}

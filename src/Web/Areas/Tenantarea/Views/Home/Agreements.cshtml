@@ -1,0 +1,98 @@
+@using TenancyContract.Areas.Tenantarea.Views.Shared
+@{
+    ViewData["Title"] = "Agreements";
+    ViewData["ActivePage"] = ManageNavPages.Agreements;
+}
+@model IEnumerable<TenancyContract.Entities.Contract>
+<h4 class="text-center">@ViewData["Title"]</h4>
+<br>
+@{
+    
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+
+                @if(Model.Count()>0){
+                    <div class="col-md-6">
+                        @foreach (var item in Model)
+                        {
+                            if(item.AcceptTenant == false)
+                            {
+                                <form method="post">
+                                <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Received Agreement</h5>
+                                    <p class="card-text">
+                                        @{
+                                            ViewBag.contractID = item.Id;
+                                        }
+                                        <input type="hidden" value="@item.Id" name="contractID"/>
+                                        <label> House Owner NID: </label> @Html.DisplayFor(m => item.HouseOwnerNID)<br>
+                                        <label id="donedone"> House Owner NID: </label> @Html.DisplayFor(m => item.Id)<br>
+                                        <label> Create Date: </label> @Html.DisplayFor(m => item.AgreementDate)<br>
+                                    </p>
+
+                                    <button type="submit" class="btn btn-success" formtarget="_blank" formaction="Confirm"><i class="fas fa-check"></i>Accept</button>
+                                    
+                                </div>
+                                </div>
+                                </form>
+                            } 
+                            else if(item.EndDate > DateTime.Now && item.AcceptTenant == true && item.AcceptHO == true)
+                            {
+                                <div class="card shadow p-3 mb-5 bg-white rounded">
+                                    <div class="card-header" id="cardHeaderOne"><i class="fas fa-circle" style="color:#7FFF00"></i> Active Agreement</div>
+                                    <form method="post">
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        <label> Toady's Date: </label> @DateTime.Now <br>
+                                        <input type="hidden" value="@item.Id" name="contractIDD"/>
+                                        <label> House Owner NID: </label> @Html.DisplayFor(m => item.HouseOwnerNID)<br>
+                                        <label> Agreement Date: </label> @Html.DisplayFor(m => item.AgreementDate)<br>
+                                        <label> Start Date: </label> @Html.DisplayFor(m => item.StartDate)<br>
+                                        <label style="color:red;"> Agreement End Date: </label> @Html.DisplayFor(m => item.EndDate)<br>
+                                        <label> Maintain Cost: </label> @Html.DisplayFor(m => item.MaintainCost)<br>
+                                    </p>
+                                    <button type="submit" class="btn btn-danger" formtarget="_blank" formaction="ResultContract">View Contract Paper</button>
+                                </div>
+                                </form>
+                                </div>  
+                            }else {
+                                <p>No active Agreement</p>
+                            }
+                        }
+                        
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header"><i class="fas fa-history"></i> History</div>
+                            <div class="card-body">
+                        @foreach (var item in Model)
+                        {
+                            if(item.EndDate < DateTime.Now)
+                            {   <div class="row">
+                               <div class="col-md-12">
+                                <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Agreement NO: @Html.DisplayFor(m=>item.Id)</h5><br>
+                                     <label style="color:red;"> Agreement Ended at: </label> @Html.DisplayFor(m => item.EndDate)<br>
+                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                </div>
+                                </div>
+                                </div>
+                               </div>
+                            }else {
+                                <p>NO History </p>
+                            }
+                        }
+                        </div>
+                        </div>
+                        
+                    </div>
+                     }else {
+                         <p>You don't have any agreement!</p>
+                     }
+         </div>
+    </div>
+</div>

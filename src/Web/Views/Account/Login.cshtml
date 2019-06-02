@@ -1,0 +1,151 @@
+﻿@{
+    Layout = null;
+}
+@using System.Globalization
+@using Microsoft.AspNetCore.Http.Features
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model LoginModel
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Tenancy_Contract</title>
+    
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/lib/fontawesome/css/all.css" />
+        <link rel="stylesheet" href="~/css/jquery-ui.css" />
+
+
+    </environment>
+    <!-- Need to cheeck font-awesome link all or onlly one file -->
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+              integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.2/css/all.css"
+              asp-fallback-href="~/lib/fontawesome/css/all.css" />
+        <link rel="stylesheet" href="~/css/jquery-ui.css" />
+
+    </environment>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div class="container" style="margin-top:100px">
+        <div class="row">
+            <div class="col">
+            </div>
+            <div class="pr-3 col-5">
+                <div class="card shadow p-3 mb-5 bg-white rounded">
+                    <div class="card-header" style="background-color:white; border-bottom:0px; font-size:25px">
+                        <a href="https://github.com/thnayan69/Tenancy-Contract">
+                            <img src="~/images/icon.png" width="45" height="40" class="d-inline-block align-top" alt="">
+                        </a>
+                        @Localizer["Login"]
+                    </div>
+                    <div class="card-body">
+                        <form method="post" asp-controller="Account" asp-action="LoginEnter">
+                            <label class="text-primary" style="font-size:18px">Account Type: </label>
+                            <div class="pl-1 form-check form-check-inline">
+
+                                <input class="form-check-input" type="radio" name="acctype" id="inlineRadio1" value="1">
+                                <label class="form-check-label" for="inlineRadio1" style="font-size:15px">
+                                    @Localizer["Tenant"]
+                                </label>
+                            </div>
+
+                            <div class="pl-4 form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="acctype" id="inlineRadio2" value="2">
+                                <label class="form-check-label" for="inlineRadio2" style="font-size:15px">
+                                    @Localizer["House Owner"]
+                                </label>
+                            </div>
+
+                            <div class="pt-2 form-group">
+                                <label>@Localizer["Your NID"]</label>
+                                <input asp-for="UserName" class="form-control" />
+                                <span asp-validation-for="UserName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>@Localizer["Your Password"]</label>
+                                <input asp-for="Password" class="form-control" />
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                            @{
+                                string a = @ViewBag.LoginError;
+                                if (a == "wrong")
+                                {
+                                    <p style="color:red">@Localizer["Wrong NID or Password"]</p>
+                                }
+                            }
+                            <p><a href="#">Forgot password?</a></p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        Don't have an Account? <p><a href="#">Create Account</a></p>
+                                    </div> <!-- form-group// -->
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    <button type="submit" class="btn btn-primary btn-lg"> Login  </button>
+                                </div>
+
+                            </div>
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="container body-content" style="margin-top:60px">
+        <footer>
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; @System.DateTime.Now.Year - Localization</p>
+                </div>
+                <div class="col-md-6 text-right">
+                    @await Html.PartialAsync("_SelectLanguagePartial")
+
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+        <script src="~/js/jquery-ui.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha256-E/V4cWE4qvAeO5MOhjtGtqDzPndRO1LBk8lJ/PR7CA4=">
+        </script>
+        <script src="~/js/jquery-ui.js"></script>
+    </environment>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+
+</body>
+</html>
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

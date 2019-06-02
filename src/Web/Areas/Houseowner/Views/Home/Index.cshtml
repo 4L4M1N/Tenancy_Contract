@@ -1,0 +1,17 @@
+﻿@using TenancyContract.Areas.Houseowner.Views.Shared
+@{
+    ViewData["Title"] = "Profile";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<h4 class="text-center">@ViewData["Title"]</h4>
+<div class="row">
+    <div class="col-md-6">
+        <ul>
+            @foreach (var claims in User.Claims)
+            {
+                <li><strong>@claims.Type</strong>: @claims.Value</li>
+            }
+        </ul>
+    </div>
+</div>

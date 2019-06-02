@@ -1,0 +1,42 @@
+﻿@using TenancyContract.Areas.Tenantarea.Views.Shared
+
+    <ul class="nav nav-pills flex-column">
+        <li class="nav-item">
+            <a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-action="Index">
+                <i class="fas fa-user"></i>
+                Profile
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link @ManageNavPages.AgreementsNavClass(ViewContext)" id="agreements" asp-action="Agreements">
+                <i class="fas fa-file-contract"></i>
+                Agreements
+            </a>
+        </li>        
+
+        <li class="nav-item">
+            <a class="nav-link @ManageNavPages.MessageNavClass(ViewContext)" id="message" asp-action="Message">
+                <i class="far fa-envelope-open"></i>
+                Message
+            </a>
+        </li>
+
+
+        <li class="nav-item">
+            <a class="nav-link @ManageNavPages.NumbersNavClass(ViewContext)" id="contract-paper" asp-action="Numbers">
+                <i class="fas fa-address-book"></i>
+                
+                 Important Numbers
+            </a>
+        </li>
+
+
+        <li class="nav-item">
+            <a class="nav-link @ManageNavPages.AccountSettingsNavClass(ViewContext)" id="contract-paper" asp-action="AccountSettings">
+                <i class="fas fa-user-cog"></i>
+                Account Settings
+            </a>
+        </li>
+
+    </ul>

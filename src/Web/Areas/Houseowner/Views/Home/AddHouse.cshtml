@@ -1,0 +1,163 @@
+@using TenancyContract.Areas.Houseowner.Views.Shared
+@{
+    ViewData["Title"] = "Add House";
+    ViewData["ActivePage"] = ManageNavPages.AddHouse;
+}
+@model TenancyContract.Models.HouseModel
+
+
+<h4 class="text-center">@ViewData["Title"]</h4><br>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card rounded">
+                    <div class="card-body">
+                        <div class="tenantForm">
+                            <form method="post" asp-area="Houseowner" asp-controller="Home" asp-action="AddHouse">
+                                <div class="form-group col-10">
+                                    <label class="control-label"> Select Division</label>
+                                    <select class="form-control" id="DivisionId" name="DivisionId" asp-for="DivisionId"
+                                            asp-items="@(new SelectList(@ViewBag.ListofDivision,"DivisionId", "DivisionName"))"></select>
+                                    <span asp-validation-for="DivisionId" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group col-10">
+                                    <label class="control-label">Select District</label>
+                                    <select class="form-control" id="DistrictId" name="DistrictId" asp-for="DistrictId"
+                                            asp-items="@(new SelectList(string.Empty,"DistrictId", "DistrictName"))"></select>
+                                    <span asp-validation-for="DistrictId" class="text-danger"></span>
+
+                                </div>
+
+                                <div class="form-group col-10">
+                                    <label class="control-label">Select Thana</label>
+                                    <select class="form-control" id="ThanaId" name="ThanaId" asp-for="ThanaId"
+                                            asp-items="@(new SelectList(string.Empty,"ThanaId", "ThanaName"))"></select>
+                                    <span asp-validation-for="ThanaId" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group col-10">
+                                    <label class="control-label">Road</label>
+                                    <input type="text" class="form-control" asp-for="AddressRoad" />
+                                    <span asp-validation-for="AddressRoad" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group col-10">
+                                    <label class="control-label">Area/Village</label>
+                                    <input type="text" class="form-control" asp-for="AddressVillage" />
+                                    <span asp-validation-for="AddressVillage" class="text-danger"></span>
+                                </div>
+
+
+
+                                <div class="form-group col-10">
+                                    <div class="form-row">
+                                        <div class="col-md-6 mb-3">
+                                            <label>Dag No</label>
+                                            <input type="text" class="form-control" asp-for="DagNo">
+                                            <span asp-validation-for="DagNo" class="text-danger"></span>
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label>House No</label>
+                                            <input type="text" class="form-control" asp-for="HouseNo">
+                                            <span asp-validation-for="HouseNo" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="col offset-5">
+                                    <button type="submit" class="btn btn-success"><i class="fas fa-check"></i>Add House</button>
+                                </div>
+
+                                @*<div class="alert-danger" asp-validation-summary="All"></div>*@
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow p-3 mb-5 bg-white rounded card-accent-primary mb-3">
+                    <div class="card-header" id="cardHeaderOne"><i class="fas fa-info-circle"></i> Instructions</div>
+                    <div class="card-body">
+                        <p class="card-text">Instructions for adding house. Please give correct informations</p>
+                        <p class="card-text"><small class="text-muted">Tenancy Contract</small></p>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="callout callout-danger b-t-1 b-r-1 b-b-1 pl-2" style="border-left: 4px solid #0080FF;">
+                    <small class="text-muted">Recuring Clients</small><br>
+                    <strong class="h4">22,643</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+    @section Scripts {
+        @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var items = "<option value=''>Select</option>";
+
+                $('#DistrictId').html(items);
+                $('#ThanaId').html(items);
+            });
+        </script>
+
+        <script type="text/javascript">
+
+
+        $(document).ready(function () {
+            $('#DivisionId').change(function () {
+                var url = '@Url.Content("~/")' + "Houseowner/Home/GetDistrict";
+                var ddlsource = "#DivisionId";
+                $.getJSON(url, { DivisionId: $(ddlsource).val() }, function (data) {
+                    var items = '';
+                    $("#DistrictId").empty();
+                    $.each(data, function (i, district) {
+                        items += "<option value='" + district.value + "'>" + district.text + "</option>";
+                    });
+                    $('#DistrictId').html(items);
+
+                });
+            });
+
+            $('#DistrictId').change(function () {
+                var url = '@Url.Content("~/")' + "Houseowner/Home/GetThana";
+                var ddlsource = "#DistrictId";
+                $.getJSON(url, { DistrictId: $(ddlsource).val() }, function (data) {
+                    var items = '';
+                    $('#ThanaId').empty();
+                    $.each(data, function (i, thana) {
+                        items += "<option value='" + thana.value + "'>" + thana.text + "</option>";
+                    });
+                    $('#ThanaId').html(items);
+                });
+            });
+        });
+        </script>
+<script type="text/javascript">
+    $('[id$=DivisionId]').change(function () {
+                var division = $("#DivisionId option:selected").text();
+                $("<input/>", { type: 'hidden', name: 'divisionName' }).val(division).appendTo("form");
+    });
+    $('[id$=DistrictId]').change(function () {
+                var division = $("#DistrictId option:selected").text();
+                $("<input/>", { type: 'hidden', name: 'districtName' }).val(division).appendTo("form");
+    });
+    $('[id$=ThanaId]').change(function () {
+                var division = $("#ThanaId option:selected").text();
+                $("<input/>", { type: 'hidden', name: 'thanaName' }).val(division).appendTo("form");
+    });
+</script>
+    }

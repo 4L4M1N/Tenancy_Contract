@@ -1,0 +1,134 @@
+﻿@using System.Globalization
+@using Microsoft.AspNetCore.Http.Features
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = "Home Page";
+}
+<link rel="stylesheet" href="~/css/index.css" />
+  <div class="auto-container">
+        <div class="pt-3 row">
+            <div class="col-sm-8">
+                <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                        <img class="d-block w-100" src="~/images/slideOne.jpg" alt="First slide" style="height: 230px;width: 100%;">
+                        </div>
+                        <div class="carousel-item">
+                        <img class="d-block w-100" src="~/images/slideTwo.jpg" alt="Second slide" style="height: 230px;width: 100%;">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 offset-0">
+                    <div class="card shadow p-3 mb-5 bg-white rounded" style="border-color: #b3faae; font-size: 16px" id="tenant">
+
+                        <div class="card-header bg-transparent text-dark" style="border-left: 5px solid #0080FF;font-weight:bold;">
+                            <i class="fas fa-phone fa-spin" style="color:red"></i> Important Numbers
+                        </div>
+                        <div class="card-body" style="font-size:15px;">
+                            
+                            <i class="fas fa-tint" style="color:deepskyblue"></i> Washa <br>
+                            <i class="fas fa-bolt" style="color:gold"></i> DESCO <br>
+                            <i class="fas fa-burn" style="color:navy"></i> Titash Gas <br>
+                            <i class="fas fa-fire-extinguisher" style="color:orangered"></i> Fire Service <br>
+                            <i class="fas fa-ambulance" style="color:red"></i> Ambulance
+                        </div>
+                        <!--
+                        <div class="card-footer text-muted" style="background-color: #B3FAAE">
+                            2 days ago
+                        </div>
+                        -->
+                    </div>
+            </div>
+    </div> 
+    <!-- Slider and Important Numbers End -->
+
+
+        <!-- Services + Notice start -->
+        <div class="auto-container">
+        <div class="pt-3 row">
+            <div class="col-sm-8"> <!-- Services + Notice  Div start -->
+                <div class="card rounded"> <!-- Card start -->
+                
+                <div class="card-header bg-transparent text-dark" style="border-left: 6px solid #0080FF;font-size:16px;font-weight:bold;">
+                     Our Services
+                </div>
+                <div class="card-body">
+                   <div class="row">
+                        <div class="col-sm-4">
+                            <div class="card text-center" id="services">
+                            
+                            <div class="card-body">
+                                <h5 class="card-title">Online Contract</h5>
+                                <i class="far fa-file-alt fa-6x" style="color:OrangeRed;"></i>
+                                <br>
+                                <br>
+                                
+                            </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="card text-center" id="services">
+                            <div class="card-body">
+                                <h5 class="card-title">Rights</h5>
+                               <i class="fas fa-fist-raised fa-6x" style="color:LimeGreen;"></i>
+                                <br>
+                                <br>
+                            </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-sm-4 ">
+                            <div class="card text-center" id="services">
+                            <div class="card-body">
+                                <h5 class="card-title">Agreements</h5>
+                                <i class="far fa-handshake fa-6x" style="color:deepskyblue;"></i>
+                                <br>
+                                <br>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                </div>
+
+                <!-- Notice start -->
+                <div class="card-footer bg-transparent text-dark" style="border-left: 6px solid #0080FF;font-size:16px;font-weight:bold;">
+                    Notices
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Implement Database</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">View</a>
+                </div>
+                <!-- Notice End -->
+
+                </div> 
+                <!-- Card End -->
+            </div>
+             <!-- Services + Notice End -->
+
+            <!-- Social Media Start-->
+            <div class="col-sm-4 offset-0">
+                    <div class="card shadow p-3 mb-5 bg-white rounded" style="border-color: #b3faae; font-size: 16px" id="tenant">
+
+                        <div class="card-header bg-transparent text-dark" style="border-left: 5px solid #0080FF;font-weight:bold;">
+                             Social Media
+                        </div>
+                        <div class="card-body" style="font-size:15px">
+                            
+                        </div>
+                    </div>
+            </div>
+            <!-- Social Media End-->
+
+            
+
+        </div>
+        </div> 
+        </div>
+
+

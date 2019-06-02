@@ -1,0 +1,61 @@
+﻿@using TenancyContract.Areas.Houseowner.Views.Shared
+@{
+    ViewData["Title"] = "House Description";
+    ViewData["ActivePage"] = ManageNavPages.HouseDescription;
+}
+@model IEnumerable<TenancyContract.Entities.House>
+<h4 class="text-center">@ViewData["Title"]</h4>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card ">
+            <div class="card-body">
+                <!-- TODO: Check Scrillbar -->
+                <!-- TODO:Add Pagination -->
+                <div class="scrollbar scrollbar-primary">
+                <div class="overflow-auto">
+                @if (Model.Count() > 0)
+                {
+                    @foreach (var item in Model)
+                    {          
+                            <div class="card flex-row flex-wrap shadow p-3 mb-5 bg-white rounded">
+                                <div class="card-header border-0">
+                                    <img src="~/images/icon.png" alt="" height="80" width="100">
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <h4 class="card-title">Dag No: @Html.DisplayFor(m => item.DagNo)</h4>
+                                            <p class="card-text"></p>
+                                            <label> Division: </label> @Html.DisplayFor(m => item.AddressDivision)<br>
+                                            <label> District: </label> @Html.DisplayFor(m => item.AddressDistrict)<br>
+                                            <label> Village/Area: </label> @Html.DisplayFor(m => item.AddressVillage)<br>
+                                            <label> House No: </label> @Html.DisplayFor(m => item.HouseNo)<br>
+                                      
+                                            <a href="#" class="btn btn-success"> <i class="fas fa-info"></i> View Details</a>
+                                            <a href="#" class="btn btn-danger"> <i class="fas fa-info"></i> Manage</a>
+                                     
+                                        </div>
+                                         <div class="col">
+                                            <h4 class="card-title">Status: </h4>
+                                            <p class="card-text"></p>
+                                            <label> Division: </label> @Html.DisplayFor(m => item.AddressThana)<br>
+                                            <label> District: </label> @Html.DisplayFor(m => item.AddressRoad)<br>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    }
+                }else
+                {
+                    <h4>You don't register any house yet! </h4>
+                    <a href="AddHouse" class="btn btn-search"><i class="fas fa-plus"></i>Add House</a>
+                }
+                </div>
+                </div>
+            </div>
+        </div>        
+     </div>
+
+</div>

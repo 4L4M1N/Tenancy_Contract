@@ -1,0 +1,97 @@
+﻿@{
+    Layout = null;
+}
+@model TenancyContract.Models.CPaperOneModel
+<html>
+<head>
+    <title>Agreement</title>
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/lib/fontawesome/css/all.css" />
+        <link rel="stylesheet" href="~/css/jquery-ui.css" />
+    </environment>
+    <!-- Need to cheeck font-awesome link all or onlly one file -->
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+              integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.2/css/all.css"
+              asp-fallback-href="~/lib/fontawesome/css/all.css" />
+        <link rel="stylesheet" href="~/css/jquery-ui.css" />
+
+    </environment>
+    <style>
+       th, td {
+  padding-top: 60px;
+  text-align: left;    
+}
+    </style>
+</head>
+<body>
+    <div class="row">
+        <img src="~/images/deed.jpg" height="300" width="900"/>
+    </div>
+    <div class="title text-center"> <h3>Tenancy Contract</h3> </div>
+    <div class="card-body">
+        <h5>@Model.HouseOwnerName , Nationality: Bangladeshi as A House Owner 1st Party </h5>
+        <h5>@Model.TenantName , Nationality: Bangladeshi as A Tenant 2nd Party </h5>
+    </div> 
+    <div class="card-body">
+        Contract duration is between @Model.StartDate to @Model.EndDate . 
+    </div>
+    <div class="card-body">
+        As a Tenant i will follow these rules. A card is a flexible and extensible content container. It includes options for headers and footers, a wide variety of content, contextual background colors, and powerful display options. If you’re familiar with Bootstrap 3, cards replace our old panels, wells, and thumbnails. Similar functionality to those components is available as modifier classes for cards.
+    </div> 
+
+    <div class="card-body">
+        The Tenant Agrees as follows - 
+        <br>
+        <ul>
+            <li>Electricy bill will @Model.ElectricityBill per Unit as per government rule. Charge may change according to use of electricity</li><br>
+            <li>Gas Bill will @Model.GasBill as per government rule. Charge may change as per government changes</li><br>
+            <li>To pay the house rent to the owner on the @Model.PayTime th day of every month.</li><br>
+            <li>To pay rent Advance: @Model.Advance only, the advance will be adjusted at the time of vacating.</li><br>
+            <li>Not to assign or sublet or part with possession of the said house or any part therof to anybody</li><br>
+            <li>to permit the Owner or his agent to enter into the said premises at all reasonable time for the purpose of inspection as and when necessary </li><br>
+            <li>To maintain the premises in a good order and effect minor repairs, security, dust bill at @Model.MaintainCost by the tenant own coast as and when required </li><br>
+            <li>Not to make any alteration to the house and use the premises for solely for residential purpose</li><br>
+            <li>As the expiry of the said terms the Tenant peacefully surrender to the House Owner the demised premises together with the House Owner's  Fixture and fittings there in the same state and condition</li><br>
+            <li>@Model.IncreaseRate % increase of basic rent at @Model.IncreaseTime </li><br>
+        </ul>
+    </div>  
+    <div class="card-body" style="height:400px"></div>
+    <div class="row">
+        <img src="~/images/deed.jpg" height="300" width="900"/>
+    </div>
+    <div class="card-body">
+        <p>The House Owner agrees as follows - </p>
+        <br>
+        <ul>
+            <li>To carry out repairs of any structural defects of walls , electric, Gas, Water and Sweweage line etc</li><br>
+            <li>To pay all rates, Taxes, AIT, VAT, Municipal Tax (Holding Tax) and assesment including the urban property taxes assessed in respect of the Said Premises</li><br>
+            <li>This agreement duration is from @Model.StartDate to @Model.EndDate, if need be vecate thedemised premises, at least 2 months notices in writing to be served by either parties. In case the Tenant wishes to review for a further period he can do son by fresh agreement and rent can be reviewed through mutual discussion.</li><br>
+            <li>The tenant must stay One year before breaking this agreement under normal cirmumstances.</li><br>
+        </ul>
+    </div>
+    <div class="card-body" style="height:100px"></div>
+        <table style="width:100%" id="signature">
+        <tr>
+            <th style="text-align:left;">Witnessess</th>
+            <th></th> 
+            <th style="text-align:right">Signature</th>
+        </tr>
+        <tr>
+            <td>1.</td>
+            <td></td>
+            <td style="text-align:right">-------------------------------------1st Party</td>
+        </tr>
+        <tr>
+            <td>2.</td>
+            <td></td>
+            <td style="text-align:right">-------------------------------------2nd Party</td>
+        </tr>
+        </table>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+﻿
+    <ul class="navbar-nav">
+        @if (User.Identity.IsAuthenticated)
+        {
+        <li class="nav-item avatar pt-1 ml-0">
+            <a class="nav-link p-0" href="#">
+                <div class="circle">
+                    
+                        @{ 
+                            string name = User.Identity.Name;
+                            
+                             <span class="initials">@name[0]</span>
+                         }
+                                            
+                </div>
+            </a>
+        </li>
+                    <!--For image avatar
+                        <li class="nav-item avatar">
+                            <a class="nav-link p-0" href="#">
+                            <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="rounded-circle z-depth-0"
+                                alt="avatar image" height="35">
+                            </a>
+                        </li>
+                    -->
+            <li class="nav-item">
+                
+                <a class="nav-link text-dark" asp-area="Tenantarea" asp-controller="Home" asp-action="Index" title="Manage">Hello @User.Identity.Name!</a>
+            </li>
+            <li class="mt-2">
+                <i class="fas fa-bell" style="color:#1d6ac8"></i><span class="badge notification-count" style="font-size:16px" id="notificationCount" data-toggle="popover" title="Notifications"></span>
+            </li>
+            <li class="nav-item">
+
+                <form asp-area="" asp-controller="Account" asp-action="Logout">
+                    <button type="submit" class="nav-link btn btn-link text-dark"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                </form>
+
+            </li>
+        }
+
+    </ul>

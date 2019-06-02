@@ -1,0 +1,234 @@
+@using System.Globalization
+@using Microsoft.AspNetCore.Http.Features
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+@model TenantRegisterModel
+
+@{
+    ViewData["Title"] = "Tenant";
+}
+
+    <body>
+        <div class="container">
+            <div class="pt-3 row">
+                <div class="pl-0 col-sm-8">
+               
+                    <div class="card shadow p-3 mb-5 bg-white rounded" style="border-color: #b3faae; font-size: 16px" id="tenant">
+                        <div class="card-header text-center" style="background-color: #B3FAAE; border-left: 4px solid #0080FF;">
+                            <h5>@Localizer["Create an account - Tenant"]</h5>
+                        </div>
+                        <div class="tenantForm">
+                            <form method="post" asp-controller="Account" asp-action="TenantRegister">
+                                <div class="form-group col-7">
+                                    <br />
+                                    <label asp-for="Name">@Localizer["Enter Your Name"] <span style="color: red">*</span></label>
+                                    <br />
+                                    <input asp-for="Name" class="form-control" />
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+
+                                </div>
+
+                                <div class="form-group col-7">
+                                    <label asp-for="Mobile">@Localizer["Enter Your Mobile No"] <span style="color: red">*</span></label>
+                                    <br />
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroupPrepend">+880</span>
+                                        </div>
+                                        <input asp-for="Mobile" class="form-control" />
+                                    </div>
+                                        <span asp-validation-for="Mobile" class="text-danger"></span>
+                                    
+                                </div>
+
+                                <div class="form-group col-7">
+                                    <label asp-for="Email">@Localizer["Enter Your Email"] <span style="color: red">*</span></label>
+                                    <br />
+                                    <input asp-for="Email" class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+
+                                <!--
+                            <div class="form-group col-7">
+                                <label asp-for="AddressVillage">@Localizer["Enter Your Village Address"] <span style="color: red">*</span></label>
+                                <br />
+                                <input asp-for="AddressVillage" class="form-control" />
+                                <span asp-validation-for="AddressVillage" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group col-10">
+                                <div class="form-row">
+                                    <div class="col">
+                                        <label asp-for="AddressDivision">@Localizer["Division"] <span style="color: red">*</span></label>
+                                        <br />
+                                        <input asp-for="Email" class="form-control" placeholder="Enter Division" />
+                                        <span asp-validation-for="AddressDivision" class="text-danger"></span>
+                                    </div>
+                                    <div class="col">
+                                        <label asp-for="AddressDistrict">@Localizer["District"] <span style="color: red">*</span></label>
+                                        <br />
+                                        <input asp-for="AddressDistrict" class="form-control" placeholder="Enter District" />
+                                        <span asp-validation-for="AddressDistrict" class="text-danger"></span>
+                                    </div>
+                                    <div class="col">
+                                        <label asp-for="AddressThana">@Localizer["Thana"] <span style="color: red">*</span></label>
+                                        <br />
+                                        <input asp-for="AddressThana" class="form-control" placeholder="Enter Thana" />
+                                        <span asp-validation-for="AddressThana" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-10">
+                                <div class="form-row">
+                                    <div class="col">
+                                        <label asp-for="AddressPO">@Localizer["Post Office"] <span style="color: red">*</span></label>
+                                        <br />
+                                        <input asp-for="AddressPO" class="form-control" placeholder="Enter Post-Office" />
+                                        <span asp-validation-for="AddressPO" class="text-danger"></span>
+                                    </div>
+                                    <div class="col">
+                                        <label asp-for="AddressRoad">@Localizer["Road No"]</label>
+                                        <br />
+                                        <input asp-for="AddressRoad" class="form-control" placeholder="Enter Road-No" />
+                                        <span asp-validation-for="AddressRoad" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            -->
+
+                                <div class="form-group col-10">
+                                    <div class="form-row">
+                                        <!--
+                                    <div class="col">
+                                        <label asp-for="DOB">@Localizer["Date of Birth"]</label>
+                                        <br/>
+                                        <input asp-for="DOB" class="form-control" placeholder="Select Birth Date" id="datepicker" type="text"/>
+                                        <span asp-validation-for="DOB" class="text-danger"></span>
+                                    </div>
+                                    -->
+                                        <div class="col">
+                                            <label asp-for="NID">@Localizer["Enter NID No"] <span style="color: red">*</span></label>
+                                            <br />
+                                            <input asp-for="NID" class="form-control" placeholder="Enter NID-No" />
+                                            <span asp-validation-for="NID" class="text-danger"></span>
+                                            @{ 
+                                                string a = @ViewBag.TenantError;
+                                                if(a == "Tenant")
+                                                {
+                                                    <p style="color:red">@Localizer["NID already Exists"]</p>
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--
+                            <div class="form-group col-10">
+                                <div class="form-row">
+                                    <div class="col-4">
+                                        <label asp-for="Gender">@Localizer["Select Gender"]</label>
+                                        <br />
+                                        <select class="form-control" id="exampleFormControlSelect1" asp-for="Gender">
+                                            <option value=1> &#9794; @Localizer["Male"]</option>
+                                            <option value=2>&#9792 @Localizer["Female"]</option>
+                                            <option value=3>@Localizer["Others"]</option>
+                                        </select>
+                                        <span asp-validation-for="Gender"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            -->
+                                <div class="form-group col-10">
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <label asp-for="Password">@Localizer["Enter Password"]</label>
+                                            <br />
+                                            <input asp-for="Password" class="form-control" />
+                                            <span asp-validation-for="Password" class="text-danger"></span>
+                                        </div>
+                                        <div class="col">
+                                            <label asp-for="ConfirmPassword">@Localizer["Re-Enter Password"] <span style="color: red">*</span></label>
+                                            <br />
+                                            <input asp-for="ConfirmPassword" class="form-control" />
+                                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                            @Html.ValidationMessageFor(model => model.Email,"",new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="pt-3 form-group col-10">
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <button type="button" class="btn btn-outline-primary">@Localizer["Sign In Instead"]</button>
+                                        </div>
+                                        <div class="col">
+
+                                        </div>
+                                        <div class="col offset-5">
+                                            <button type="submit" class="btn btn-success"><i class="fas fa-check"></i> @Localizer["Create Account"]</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                        <!--
+                        <div class="card-footer text-muted" style="background-color: #B3FAAE">
+                            2 days ago
+                        </div>
+                        -->
+                    </div>
+                </div>
+                <!--Instruction -->
+                <div class="pr-1 col-sm-4 offset-0">
+                    <div class="card shadow p-3 mb-5 bg-white rounded" style="border-color: #b3faae; font-size: 16px" id="tenant">
+
+                        <div class="card-header" style="background-color: #B3FAAE">
+                            <i class="fas fa-info" style="color:red"></i> @Localizer["Instructions"]
+                        </div>
+                        <div class="card-body">
+                            //TODO: Write Instruction for Register
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                        <!--
+                        <div class="card-footer text-muted" style="background-color: #B3FAAE">
+                            2 days ago
+                        </div>
+                        -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+<div asp-validation-summary="All" class="text-danger"></div>
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        //Datepicker
+        //Must be cheeck inserting data
+        $(function () {
+            $("#datepicker").datepicker();
+        });
+        $(document).ready(function () {
+            var dob = document.getElementById('datepicker').value;
+            var splitData = "";
+            if (dob.indexOf(" ") > 0) {
+                splitData = dob.split(" ");
+            }
+            else {
+                splitData = dob.split("T");
+            }
+            var time = splitData[1].substring(0, 5);
+            if (time.slice(-1) == ":") {
+                time = time.substring(0, time.length - 1);
+            }
+            var amPmTime = splitData[2];
+            $('#datepicker').attr('value', splitData[0]);
+            //$('#timepicker').attr('value', time + ' ' + amPmTime);
+        });
+    </script>
+}
+

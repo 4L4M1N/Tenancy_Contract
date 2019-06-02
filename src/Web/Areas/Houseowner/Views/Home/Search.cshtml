@@ -1,0 +1,48 @@
+﻿@using TenancyContract.Areas.Houseowner.Views.Shared
+@{
+    ViewData["Title"] = "Search Tenant";
+    ViewData["ActivePage"] = ManageNavPages.ContractPaper;
+}
+@model TenancyContract.Entities.Tenant
+<h4 class="text-center">@ViewData["Title"]</h4><br>
+<div class="active-cyan-4 mb-4">
+    <form class="form-inline active-cyan-4" method="get" asp-area="Houseowner" asp-controller="Home" asp-action="Search">
+        <input class="form-control w-75 mr-3" type="text" placeholder="Search" aria-label="Search" name="searchString" id="searchString">
+        <input type="submit" class="btn btn-success" value="Search" />
+    </form>
+</div>
+
+@if(ViewBag.Tenant == "true")
+{
+    <h5 class="card-title"><span style="color:red">Tenant Not Found! Check NID</span></h5>
+}
+@if(Model != null)
+{
+     <div>
+         <h4>Tenant Found</h4>
+     </div>
+     <br>
+        <div class="card flex-row flex-wrap shadow p-3 mb-5 bg-white rounded">
+            <div class="card-header">
+                <!-- TODO: Image Location set pending also Logic-->
+                <img src="~/images/index.png" alt="" class="rounded" height="200" width="200">
+            </div>
+            <div class="card-block">
+                <h4 class="card-title">@Model.Name</h4>
+                <h5 class="card-title">NID No: @Model.NID</h5>
+                <h5 class="card-title">Phone No: @Model.Mobile</h5>
+                <h5 class="card-title">Email: @Model.Email</h5>
+                <h5>Address: </h5>
+                
+            </div>
+            <div class="w-100"></div>
+            <div class="card-footer w-100 text-muted">
+               <a href="ContractPaper" class="btn btn-danger offset-9"><i class="fas fa-plus"></i> Add & Next</a>
+            </div>
+        </div>
+}
+@if(ViewBag.TenantError == 0 && ViewBag.TenantErrorID != null)
+{
+    <h5 class="card-title"><span style="color:red">This NID: @ViewBag.TenantErrorID has already made an agreement with you!</span></h5>
+
+}

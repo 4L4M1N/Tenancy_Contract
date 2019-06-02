@@ -1,0 +1,229 @@
+@using TenancyContract.Areas.Houseowner.Views.Shared
+@{
+    ViewData["Title"] = "Manage Tenant";
+    ViewData["ActivePage"] = ManageNavPages.Tenants;
+}
+@model TenancyContract.Models.CPaperOneModel
+<h4 class="text-center">@ViewData["Title"]</h4><br>
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-4">
+            <div class="card shadow p-3 mb-5 bg-white rounded">
+            <div class="card-header" id="cardHeaderOne"><i class="fas fa-hand-pointer"></i> Selection</div>
+            <div class="card-body">
+            <label class="control-label"> Select House</label>
+                <select class="form-control" id="houseID" name="houseID"
+                asp-items="@(new SelectList(@ViewBag.HouseList,"Id", "DagNo"))"></select><br>
+            <label class="control-label"> Select Tenant NID</label>
+                <select class="form-control" id="contractID" name="contractID"
+                asp-items="@(new SelectList(string.Empty,"Id", "TenantNID"))"></select>    
+            </div>
+            </div>
+            </div>
+
+            <div class="col-8">
+            <div class="card shadow p-3 mb-5 bg-white rounded">
+            <div class="card-header" id="cardHeaderTwo"><i class="fas fa-user-tag"></i> Tenant Info</div>
+            <div class="card-body">
+                <div class="form-group row mb-0">
+                    <label for="" class="col-sm-3 col-form-label">Tenant Name: </label>
+                    <div class="col-sm-4">
+                        <input type="text" readonly class="form-control-plaintext" id="tname" />
+                    </div>
+                </div>  
+                <div class="form-group row mb-0">
+                    <label for="" class="col-sm-3 col-form-label">Tenant NID: </label>
+                    <div class="col-sm-4">
+                        <input type="text" readonly class="form-control-plaintext" id="tnid" />
+                    </div>
+                </div>
+
+                <div class="form-group row mb-0">
+                    <label for="" class="col-sm-3 col-form-label">Tenant Phone: </label>
+                    <div class="col-sm-4">
+                        <input type="text" readonly class="form-control-plaintext" id="tphone" />
+                    </div>
+                </div>  
+                <div class="form-group row mb-0">
+                    <label for="" class="col-sm-3 col-form-label">Tenant Email: </label>
+                    <div class="col-sm-4">
+                        <input type="text" readonly class="form-control-plaintext" id="temail" />
+                    </div>
+                </div>                                            
+                
+            </div>
+            </div>
+            <br>
+        </div>  
+
+    </div>
+            <div class="card shadow p-3 mb-5 bg-white rounded">
+            <div class="card-header" id="cardHeaderThree"><i class="fas fa-file-signature"></i> Contract Info</div>
+            <form method="post">
+            <div class="card-body">
+                <input type="hidden" value="@User.Claims.ElementAt(2).Value" asp-for="HouseOwnerName" />
+                <div class="form-group row  mb-0">
+                    <label for="" class="col-sm-3 col-form-label">Tenant Name: </label>
+                    <div class="col-sm-4">
+                        <input type="text" readonly class="form-control-plaintext" id="ctname" asp-for="TenantName" />
+                    </div>
+                </div>            
+                <div class="form-group row mb-0">
+                    <label for="" class="col-sm-3 col-form-label">Contract Create Date </label>
+                    <div class="col-sm-4">
+                        <input type="text" readonly class="form-control-plaintext" id="cagreedate" asp-for="AgreementDate" />
+                    </div>
+                </div>
+                <div class="form-group row mb-0">
+                    <label for="" class="col-sm-3 col-form-label">House ID: </label>
+                    <div class="col-sm-6">
+                        <input type="text" readonly class="form-control-plaintext" id="chouse" asp-for="HouseId" />
+                    </div>
+                </div>
+
+                <div class="form-group row mb-0">
+                    <label for="" class="col-sm-3 col-form-label">Contract Started at: </label>
+                    <div class="col-sm-6">
+                        <input type="text" readonly class="form-control-plaintext" id="cstart" asp-for="StartDate" />
+                        <span></span>
+                    </div>
+                </div>                
+                
+                <div class="form-group row mb-0">
+                    <label for="" class="col-sm-3 col-form-label">Contract End at: </label>
+                    <div class="col-sm-6">
+                        <input type="text" readonly class="form-control-plaintext" id="cend" asp-for="EndDate" />
+                        <span></span>
+                    </div>
+                </div>                 
+
+                <div class="form-group row mb-0">
+                    <label for="" class="col-sm-3 col-form-label">Increase Rate after: </label>
+                    <div class="col-sm-6">
+                        <input type="text" readonly class="form-control-plaintext" id="cincreasetime" asp-for="IncreaseTime" />
+                        <span></span>
+                    </div>
+                </div> 
+
+                <div class="form-group row mb-0">
+                    <label for="" class="col-sm-3 col-form-label">Increase Rate : </label>
+                    <div class="col-sm-6">
+                        <input type="text" readonly class="form-control-plaintext" id="cincreaserate" asp-for="IncreaseRate" />
+                        <span></span>
+                    </div>
+                </div> 
+                <div class="form-group row mb-0">
+                    <label for="" class="col-sm-3 col-form-label">Advance Given: </label>
+                    <div class="col-sm-6">
+                        <input type="text" readonly class="form-control-plaintext" id="cadvance" asp-for="Advance" />
+                        <span></span>
+                    </div>
+                </div>
+                <div class="form-group row mb-0">
+                    <label for="" class="col-sm-3 col-form-label">Gas Bill: </label>
+                    <div class="col-sm-6">
+                        <input type="text" readonly class="form-control-plaintext" id="cgas" asp-for="GasBill" />
+                        <span></span>
+                    </div>
+                </div>                                                   
+                <div class="form-group row mb-0">
+                    <label for="" class="col-sm-3 col-form-label">Maintain Cost: </label>
+                    <div class="col-sm-6">
+                        <input type="text" readonly class="form-control-plaintext" id="cmaintain" asp-for="MaintainCost" />
+                        <span></span>
+                    </div>
+                </div>
+                <div class="form-group row mb-0">
+                    <label for="" class="col-sm-3 col-form-label">Electricity Bill: </label>
+                    <div class="col-sm-6">
+                        <input type="text" readonly class="form-control-plaintext" id="celectricity" asp-for="ElectricityBill" />
+                        <span></span>
+                    </div>
+                </div>                   
+                <label>Tenant Acceptance: </label>  <label id="caccho"></label><br>
+                <label>House Owner Acceptance: </label> <label id="ctenantho"></label><br>
+
+            </div>
+            <div class="row">
+                <div class="col-md-3 text-left">
+                    <button type="submit" class="btn btn-danger" formtarget="_blank" formaction ="ViewPDF">Show Contract Paper</button>
+                </div>
+            </div>
+            </form>
+            </div>
+            </div>
+</div>
+@section Scripts {
+        @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var items = "<option value=''>Select</option>";
+
+                $('#contractID').html(items);
+               
+            });
+        </script>
+
+        <script type="text/javascript">
+        $(document).ready(function () {
+            $('#houseID').change(function () {
+                var url = '@Url.Content("~/")' + "Houseowner/Home/GetTenantContract";
+                var ddlsource = "#houseID";
+                $.getJSON(url, { houseID: $(ddlsource).val() }, function (data) {
+                    var items = '';
+                    $("#contractID").empty();
+                    $.each(data, function (i, contract) {
+                        items += "<option value='" + contract.value + "'>" + contract.text + "</option>";
+                    });
+                    $('#contractID').html(items);
+
+                });
+            });
+        });
+        </script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#contractID').on('change', function (){
+                    var url = '@Url.Content("~/")' + "Houseowner/Home/GetTenantInfo";
+                    var ddlsource = this.options[this.selectedIndex].text;;
+                    $.getJSON(url,{ TenantNID:ddlsource}, function (data) {
+                        $('#tnid').val(data.nid);
+                        $('#tname').val(data.name);
+                        $('#tphone').val(data.phone);
+                        $('#temail').val(data.email);
+                        $('#ctname').val(data.name);
+                    });
+                });
+            });
+        </script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#contractID').on('change', function (){
+                    var url = '@Url.Content("~/")' + "Houseowner/Home/GetContractInfo";
+                    var houseid = "#houseID";
+                    var ddlsource = this.options[this.selectedIndex].text;;
+                    $.getJSON(url,{ TenantNID:ddlsource, houseID: $(houseid).val()}, function (info) {
+                        $('#cid').val(info.id);
+                        $('#chouse').val(info.houseId);
+                        $('#cagreedate').val(info.agreementDate);
+                        $('#cstart').val(info.startDate);
+                        $('#cend').val(info.endDate);
+                        $('#cadvance').val(info.advance);
+                        $('#cgas').val(info.gasBill);
+                        $('#cmaintain').val(info.maintainCost);
+                        $('#celectricity').val(info.electricityBill);
+                        $('#ctenantid').text(info.tenantNID);
+                        $('#cincreasetime').val(info.increaseTime);
+                        $('#cincreaserate').val(info.increaseRate);
+                        if(info.acceptHO == true){
+                        $('#caccho').text("Yes");}
+                        if(info.acceptTenant == true){
+                        $('#ctenantho').text("Yes");}
+                    });
+                });
+            });
+        </script>
+    }
