@@ -7,11 +7,60 @@
 <h4 class="text-center">@ViewData["Title"]</h4>
 <div class="row">
     <div class="col-md-6">
-        <ul>
-            @foreach (var claims in User.Claims)
-            {
-                <li><strong>@claims.Type</strong>: @claims.Value</li>
-            }
-        </ul>
+        one
     </div>
+    <div class="col-md-6">
+        <img src="~/images/user.jpg" alt="John Doe" id='img-upload' class="mr-3 mt-3 rounded-circle mx-auto d-block" style="width:150px">
+
+        <div class="form-group">
+        <div class="form-group pl-2">Upload Image</div>
+        <div class="input-group">
+            <span class="input-group-btn">
+                <span class="btn btn-default btn-file pt-0">
+                    <button class="btn btn-success">Browse</button>
+                    <input type="file" id="imgInp">
+                </span>
+            </span>
+            <input type="text" class="form-control" readonly>
+        </div>
+        </div>
 </div>
+@section Scripts {
+    <script> 
+        $(document).ready( function() {
+    	$(document).on('change', '.btn-file :file', function() {
+		var input = $(this),
+			label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+		input.trigger('fileselect', [label]);
+		});
+
+		$('.btn-file :file').on('fileselect', function(event, label) {
+		    
+		    var input = $(this).parents('.input-group').find(':text'),
+		        log = label;
+		    
+		    if( input.length ) {
+		        input.val(log);
+		    } else {
+		        if( log ) alert(log);
+		    }
+	    
+		});
+		function readURL(input) {
+		    if (input.files && input.files[0]) {
+		        var reader = new FileReader();
+		        
+		        reader.onload = function (e) {
+		            $('#img-upload').attr('src', e.target.result);
+		        }
+		        
+		        reader.readAsDataURL(input.files[0]);
+		    }
+		}
+
+		$("#imgInp").change(function(){
+		    readURL(this);
+		}); 	
+	});
+    </script>
+}

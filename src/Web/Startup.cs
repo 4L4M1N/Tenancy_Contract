@@ -21,16 +21,17 @@ using Web.Identity;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Rotativa.AspNetCore;
 using Web.Repository;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace TenancyContract
 {
-   public class Startup
+    public class Startup
     {
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -63,13 +64,15 @@ namespace TenancyContract
                     options.SupportedCultures = supportedCultures;
                     options.SupportedUICultures = supportedCultures;
                 });
-             services.AddDbContext<TenancyContractDbContext>(options =>
-                options.UseSqlServer(
-                Configuration.GetConnectionString("TenancyContractDB"))); 
-            services.AddIdentityCore<Tenant>(options => {
-                
+            services.AddDbContext<TenancyContractDbContext>(options =>
+               options.UseSqlServer(
+               Configuration.GetConnectionString("TenancyContractDB")));
+            services.AddIdentityCore<Tenant>(options =>
+            {
+
             });
-            services.AddIdentityCore<HouseOwner>(options => {
+            services.AddIdentityCore<HouseOwner>(options =>
+            {
             });
             services.AddScoped<IUserStore<Tenant>, TenantUserStore>();
             services.AddScoped<IUserStore<HouseOwner>, HouseOwnerUserStore>();
@@ -84,10 +87,11 @@ namespace TenancyContract
             });
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<INotificationRepository, NotificationRepository>();
-
-                
+            services.AddSingleton<IFileProvider>(
+                new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/UserImages"))
+            );
         }
-        
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -119,7 +123,7 @@ namespace TenancyContract
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
-                
+
             });
 
             RotativaConfiguration.Setup(env);

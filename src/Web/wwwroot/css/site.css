@@ -248,7 +248,25 @@ body {
   #cardHeaderFour {
     color:#fff;text-shadow:0 -1px 0 rgba(0,0,0,0.25);background-color:#60b044;background-image:-moz-linear-gradient(#8add6d, #60b044);background-image:-webkit-linear-gradient(#8add6d, #60b044);border-color:#74bb5a #74bb5a #509338
   }
-
+  .btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: rgb(55, 219, 77);
+    cursor: inherit;
+    display: block;
+}
 
 
 
