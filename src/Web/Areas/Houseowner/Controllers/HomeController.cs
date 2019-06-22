@@ -41,6 +41,20 @@ namespace TenancyContract.Areas.Houseowner.Controllers
 
         public IActionResult Index()
         {
+            //return View();
+            var userNID = User.Claims.ElementAt(1).Value;
+            var hoInfo = new HouseOwnerInfo();
+            hoInfo = _db.HouseOwners
+                        .Where(p => p.NID == userNID)
+                        .Select(p => new HouseOwnerInfo()
+                        {
+                            Name = p.Name,
+                            Email = p.Email,
+                            Phone = p.Mobile,
+                            NID = p.NID,
+                            Image = p.Image
+                        }
+                        ).SingleOrDefault();
             return View();
         }
         public IActionResult AccountSettings()
